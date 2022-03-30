@@ -6,10 +6,10 @@ export default {
   component: TextField,
 };
 
-const Template: ComponentStory<typeof TextField> = (args) => <TextField {...args} value="Text field" />;
+const Template: ComponentStory<typeof TextField> = (args) => <TextField {...args} />;
 
 export const Default = Template.bind({});
 
 Default.args = {
-  variant: 'outlined',
+  placeholder: 'Write something here...',
 };

@@ -2,22 +2,36 @@ import { createTheme } from '@mui/material/styles';
 
 const theme = createTheme({
   spacing: (factor: number) => `${2 * factor}px`,
+  shape: {
+    borderRadius: 10,
+  },
   typography: {
     allVariants: {
       fontFamily: "'Mulish', sans-serif",
+      lineHeight: '21px',
     },
+    fontWeightRegular: 400,
+    fontWeightMedium: 600,
+    fontWeightBold: 700,
+    fontSize: 14,
   },
   palette: {
     background: {
-      default: '#e5e5e5',
       paper: '#fff',
     },
     primary: {
-      500: '#2622b5',
+      main: '#2622b5',
     },
     grey: {
       300: '#dfe3e9',
+      500: '#858798',
+      600: '#f8f9fb',
+      700: '#dcdfee',
+      900: '#232747',
     },
+    text: {
+      primary: '#0b0f32',
+    }
   },
 });
 
@@ -26,10 +40,21 @@ export default createTheme(theme, {
     MuiCssBaseline: {
       styleOverrides: {
         body: {
-          padding: '45px 77px',
+          backgroundColor: theme.palette.grey[600],
+          fontFamily: theme.typography.body1.fontFamily,
         },
       },
     },
+    // MuiTextField: {
+    //   variants: [
+    //     {
+    //       props: { variant: 'outlined' },
+    //       style: {
+            
+    //       }
+    //     }
+    //   ]
+    // }
     // MuiTextField: {
     //   variants: [
     //     {

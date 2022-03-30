@@ -1,5 +1,6 @@
-import { muiTheme } from 'storybook-addon-material-ui';
 import theme from '../theme';
+import { ThemeProvider } from '@mui/material/styles';
+import { ThemeProvider as Emotion10ThemeProvider } from 'emotion-theming';
 
 export const parameters = {
   actions: { argTypesRegex: "^on[A-Z].*" },
@@ -11,4 +12,14 @@ export const parameters = {
   },
 };
 
-export const decorators = [muiTheme(theme)];
+const withThemeProvider = (Story, context) => (
+  <Emotion10ThemeProvider theme={theme}>
+    <ThemeProvider theme={theme}>
+      <Story {...context} />
+    </ThemeProvider>
+  </Emotion10ThemeProvider>
+);
+
+
+export const decorators = [withThemeProvider];
+// export const decorators = [muiTheme([theme])];

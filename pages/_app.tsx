@@ -6,6 +6,8 @@ import { CacheProvider, EmotionCache } from '@emotion/react';
 import createCache from '@emotion/cache';
 import Head from 'next/head';
 import theme from '../theme';
+import { useState } from 'react';
+import { QueryClient, QueryClientProvider } from 'react-query';
 
 interface MyAppProps extends AppProps {
   emotionCache?: EmotionCache;
@@ -14,17 +16,23 @@ interface MyAppProps extends AppProps {
 const clientSideEmotionCache = createCache({ key: 'css', prepend: true });
 
 const MyApp = ({ Component, pageProps, emotionCache = clientSideEmotionCache }: MyAppProps) => {
+  const [queryClient] = useState(() => new QueryClient({
+    mutationCache: undefined,
+  }));
+
   return (
-    <CacheProvider value={emotionCache}>
-      <Head>
-        <meta name="viewport" content="initial-scale=1, width=device-width" />
-      </Head>
-      <ThemeProvider theme={theme}>
-        <CssBaseline />
-        <Component {...pageProps} />
-      </ThemeProvider>
-    </CacheProvider>
+    <QueryClientProvider client={queryClient}>
+      <CacheProvider value={emotionCache}>
+        <Head>
+          <meta name="viewport" content="initial-scale=1, width=device-width" />
+        </Head>
+        <ThemeProvider theme={theme}>
+          <CssBaseline />
+          <Component {...pageProps} />
+        </ThemeProvider>
+      </CacheProvider>
+    </QueryClientProvider>
   )
 };
 
-export default MyApp
+export default MyApp;

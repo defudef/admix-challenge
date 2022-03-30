@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "downlevelIteration": true,
     "baseUrl": "./",
     "target": "es5",
     "lib": ["dom", "dom.iterable", "esnext"],
@@ -16,7 +17,8 @@
     "jsx": "preserve",
     "incremental": true,
     "paths": {
-      "@ui-kit/*": ["ui-kit/*"]
+      "@ui-kit/*": ["ui-kit/*"],
+      "@models/*": ["models/*"],
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
