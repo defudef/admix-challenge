@@ -50,28 +50,5 @@ export default createTheme(theme, {
         },
       },
     },
-    // MuiTextField: {
-    //   variants: [
-    //     {
-    //       props: { variant: 'outlined' },
-    //       style: {
-            
-    //       }
-    //     }
-    //   ]
-    // }
-    // MuiTextField: {
-    //   variants: [
-    //     {
-    //       props: { variant: 'outlined' },
-    //       style: {
-    //         backgroundColor: theme.palette.background.paper,
-    //         padding: theme.spacing(6, 7),
-    //         border: `1px solid ${theme.palette.grey['300']}`,
-    //         borderRadius: '10px',
-    //       },
-    //     },
-    //   ],
-    // },
   }
 });

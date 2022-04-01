@@ -26,16 +26,16 @@ const TableDropdown = ({ _id }: Props) => {
   return (
     <div>
       <Button
-        id="basic-button"
+        id={`menu-${_id}`}
         aria-controls={open ? 'basic-menu' : undefined}
         aria-haspopup="true"
         aria-expanded={open ? 'true' : undefined}
         onClick={handleClick}
       >
-        <Image src={MenuDotsIcon} />
+        <Image src={MenuDotsIcon} alt="Actions" />
       </Button>
       <Menu
-        id="basic-menu"
+        id={`menu-${_id}`}
         anchorEl={anchorEl}
         open={open}
         onClose={handleClose}
@@ -43,7 +43,7 @@ const TableDropdown = ({ _id }: Props) => {
           'aria-labelledby': 'basic-button',
         }}
       >
-        <Link href={`/app/${_id}`}>
+        <Link href={`/app/${_id}`} passHref>
           <MenuItem>Edit</MenuItem>
         </Link>
       </Menu>

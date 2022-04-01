@@ -50,7 +50,7 @@ const AppsList = ({ data }: AppsListProps) => {
         <TableHead>
           <TableRow>
             {headerColumns.map(({ name, width }) => (
-              <TableCell variant="head" {...(width && { sx: { width } })}>{name}</TableCell>
+              <TableCell key={name} variant="head" {...(width && { sx: { width } })}>{name}</TableCell>
             ))}
           </TableRow>
         </TableHead>

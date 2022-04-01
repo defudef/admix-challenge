@@ -9,4 +9,6 @@ const Status = memo(({ isPublished }: Props) => (
   <Switch checked={isPublished} disableTouchRipple />
 ));
 
+Status.displayName = 'Status';
+
 export default Status;

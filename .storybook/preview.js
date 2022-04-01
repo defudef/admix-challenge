@@ -22,4 +22,3 @@ const withThemeProvider = (Story, context) => (
 
 
 export const decorators = [withThemeProvider];
-// export const decorators = [muiTheme([theme])];

@@ -26,4 +26,6 @@ const ItemFeatured = memo(() => (
   </Container>
 ));
 
+ItemFeatured.displayName = 'ItemFeatured';
+
 export default ItemFeatured;
