@@ -19,6 +19,7 @@
     "paths": {
       "@ui-kit/*": ["ui-kit/*"],
       "@models/*": ["models/*"],
+      "@assets/*": ["assets/*"],
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],

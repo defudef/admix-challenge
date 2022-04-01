@@ -22,7 +22,12 @@ const theme = createTheme({
     primary: {
       main: '#2622b5',
     },
+    info: {
+      main: '#5287ed',
+      500: '#5287ed',
+    },
     grey: {
+      200: 'rgba(239, 241, 244, 1)',
       300: '#dfe3e9',
       500: '#858798',
       600: '#f8f9fb',

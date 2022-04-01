@@ -12,6 +12,10 @@ const Home: NextPage = () => {
     mutate({
       pageIndex: 0,
       pageSize: 10,
+      // filters: [{
+      //   name: '_id',
+      //   value: '5fb3e231f8b0bfb7a0705d3a',
+      // }],
     });
   }, [])
 
