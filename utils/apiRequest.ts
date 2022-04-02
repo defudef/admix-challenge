@@ -13,26 +13,24 @@ const makeInit = (method: string, body?: object): RequestInit => ({
   ...(body && { body: JSON.stringify(body) }),
 });
 
-export const post = <TBody extends object = object, TResponse = unknown>(url: string): ApiResponse<TResponse> => (
-  async (data: TBody) => {
-    const response = await fetch(`/api/${url}`, makeInit('post', data))
+export const post = <TBody extends object = object, TResponse = unknown, TMakeBody extends object = TBody>(url: string, makeBody?: (data: TMakeBody) => object): ApiResponse<TResponse> => (
+  async (data: TMakeBody) => {
+    const body =  makeBody ? makeBody(data) : data;
 
-    if (!response.ok) {
-      return Promise.reject(data);
-    }
+    const response = await fetch(`/api/${url}`, makeInit('post', body));
 
-    return response.json();
+    return response.ok
+      ? response.json()
+      : Promise.reject(data);
   }
 );
 
-export const put = <TBody extends object = object, TResponse = unknown>(url: string): ApiResponse<TResponse> => (
-  async (data: TBody) => {
-    const response = await fetch(`/api/${url}`, makeInit('put', data))
+export const put = <TBody extends object = object, TResponse = unknown, TMakeBody extends object = TBody>(url: string, makeBody?: (data: TMakeBody) => object): ApiResponse<TResponse> => (
+  async (data: TMakeBody) => {
+    const response = await fetch(`/api/${url}`, makeInit('put', makeBody ? makeBody(data) : data));
 
-    if (!response.ok) {
-      return Promise.reject(data);
-    }
-
-    return response.json();
+    return response.ok
+      ? response.json()
+      : Promise.reject(data);
   }
 );

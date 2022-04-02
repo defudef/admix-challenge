@@ -1,26 +1,29 @@
 import type { NextPage } from 'next';
-import PageLayout from 'components/PageLayout';
+import { useMemo, useState } from 'react';
 import SearchBar from '@ui-kit/SearchBar';
+import PageLayout from 'components/PageLayout';
 import AppsList from 'components/AppsList';
-import useAppsMutation from 'hooks/queries/useAppsMutation';
-import { useEffect } from 'react';
+import useAppListQuery, { UseAppListQueryProps } from 'hooks/queries/useAppListQuery';
+import useDebounce from 'hooks/useDebounce';
 
 const Home: NextPage = () => {
-  const { mutate, data } = useAppsMutation();
+  const [searchTerm, setSearchTerm] = useState<string>('');
+  const phrase = useDebounce(searchTerm, 500);
 
-  useEffect(() => {
-    mutate({
-      pageIndex: 0,
-      pageSize: 10,
-    });
-  }, [mutate]);
+  const query = useMemo<UseAppListQueryProps>(() => ({
+    pageIndex: 0,
+    pageSize: 10,
+    phrase,
+  }), [phrase]);
+
+  const { data, isLoading } = useAppListQuery(query);
 
   return (
     <PageLayout>
-      <SearchBar />
-      <AppsList data={data?.data} />
+      <SearchBar value={searchTerm} onChange={({ currentTarget }) => setSearchTerm(currentTarget.value)} />
+      <AppsList data={data?.data} isLoading={isLoading} phrase={phrase} />
     </PageLayout>
   );
 }
 
-export default Home
+export default Home;

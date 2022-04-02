@@ -1,6 +1,6 @@
 import type App from './App';
 
-type AppPickedFields = 'title' | 'avails' | 'score' | 'platform' | 'storeCategories';
+type AppPickedFields = '_id' | 'title' | 'avails' | 'score' | 'platform' | 'storeCategories';
 
 type AppRequest = Partial<Pick<App, AppPickedFields>> & {
   geos?: string[];

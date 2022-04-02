@@ -41,27 +41,42 @@ const Strong = styled('strong')(({ theme }) => ({
 
 interface AppsListProps {
   data: AppResponse | undefined;
+  isLoading: boolean;
+  phrase?: string;
 }
 
-const AppsList = ({ data }: AppsListProps) => {
+const SearchingCell = styled(TableCell)(({ theme }) => ({
+  textAlign: 'center',
+  padding: theme.spacing(8),
+
+}));
+
+const AppsList = ({ data, isLoading, phrase }: AppsListProps) => {
   return (
     <Box>
       <Table sx={{ tableLayout: 'fixed' }}>
         <TableHead>
           <TableRow>
-            {headerColumns.map(({ name, width }) => (
-              <TableCell key={name} variant="head" {...(width && { sx: { width } })}>{name}</TableCell>
+            {headerColumns.map(({ name, width }, index) => (
+              <TableCell key={index} variant="head" {...(width && { sx: { width } })}>{name}</TableCell>
             ))}
           </TableRow>
         </TableHead>
         <TableBody>
-          {data?.items?.map(withStoreInfo).map(item => (
+          {isLoading && (
+            <TableRow>
+              <SearchingCell colSpan={headerColumns.length}>
+                {phrase ? `Searching for "${phrase}"...` : 'Searching...'}
+              </SearchingCell>
+            </TableRow>
+          )}
+          {!isLoading && data?.items?.map(withStoreInfo).map(item => (
             <TableRow key={item._id}>
               <TableCell className="ellipsis">
                 <Status isPublished={!item.isDeleted} />
               </TableCell>
               <TableCell>
-                <TitlePublisher title={item.storeInfo?.title} publisher={item.storeInfo?.studio} image={item.storeInfo?.icon} />
+                <TitlePublisher title={item.title} publisher={item.storeInfo?.studio} image={item.storeInfo?.icon} />
               </TableCell>
               <TableCell>
                 {item.featured && <ItemFeatured />}

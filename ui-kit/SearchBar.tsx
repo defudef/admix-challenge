@@ -1,4 +1,4 @@
-import { memo } from 'react';
+import { ChangeEventHandler, memo } from 'react';
 import { styled } from '@mui/material/styles';
 import InputAdornment from '@mui/material/InputAdornment';
 import TextField from './TextField';
@@ -31,8 +31,15 @@ const Icon = memo(() => (
   </Svg>
 ));
 
-const SearchBar = () => (
+interface Props {
+  onChange: ChangeEventHandler<HTMLInputElement>;
+  value: string;
+}
+
+const SearchBar = ({ onChange, value }: Props) => (
   <SearchTextField
+    onChange={onChange}
+    value={value}
     endAdornment={<InputAdornment position="start" component={Icon} />}
     fullWidth
     placeholder="Search app name"
